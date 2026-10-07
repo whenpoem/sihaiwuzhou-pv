@@ -1,0 +1,12 @@
+# 仓库只收录代码与说明；音频、歌词、图片、字体、模型、缓存与渲染结果都不收录
+/*
+!/.gitignore
+!/README.md
+!/LICENSE
+!/requirements.txt
+!/scripts/
+!/data/
+/data/*
+!/data/timing说明.md
+__pycache__/
+*.pyc

@@ -1,0 +1,18 @@
+# 制作时的版本（Python 3.11，Windows 11，CUDA 12.8）
+numpy==2.4.4
+scipy==1.17.1
+pillow==12.2.0
+opencv-python==5.0.0.93
+moderngl==5.12.0
+skia-python==144.0.post2
+opencc-python-reimplemented==0.1.7
+pypinyin==0.55.0
+matplotlib==3.11.1
+requests==2.34.2
+soundfile==0.14.0
+librosa==0.11.0
+# 数据准备与抠图
+torch==2.11.0+cu128
+demucs==4.1.0
+stable-ts==2.19.1
+ultralytics==8.4.115
