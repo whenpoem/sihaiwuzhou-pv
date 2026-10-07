@@ -1,6 +1,6 @@
 # 《四海五洲》文字 PV 渲染代码
 
-这里是《四海五洲》文字 PV 的全部渲染代码。歌曲由 TOPKINGCREAM 作词作曲，原唱星尘，每分钟 140 拍，时长 3 分 19.77 秒；PV 主要由Opus-5.5制作。成片全部都由程序生成，没有使用任何剪辑软件、视频素材或现成的动效模板。
+这里是《四海五洲》文字 PV 的全部渲染代码。歌曲由 TOPKINGCREAM 作词作曲，原唱星尘，每分钟 140 拍，时长 3 分 19.77 秒；PV 主要由Opus-5.5制作。成片全部由程序生成。
 
 ## 这部 PV 是怎样做出来的
 
@@ -28,13 +28,23 @@
 | `scripts/style/look.py` | 两种质感的调色参考实现、色板、字体与繁简转换 |
 | 数据准备脚本 | `separate.py`（Demucs 分离人声与鼓）、`analyze_audio.py`（节拍与响度）、`transcribe*.py` 与 `align_lyrics.py`（Whisper 逐字对齐）、`timing.py`（逐字时间与鼓点）、`fetch_images.py`（从 Wikimedia Commons 下载公开授权的图片并记录授权） |
 
-## 仓库里不包含的内容
+## 渲染所需的文件
 
-仓库只放代码。歌曲音频和歌词的版权属于原作者，没有放进来；画面用到的照片、纹理和字体也不在仓库里，它们来自 Wikimedia Commons、Poly Haven 和开源字体（霞鹜文楷、朱雀仿宋），授权各不相同。渲染时还会用到 Ultralytics 的 YOLO26 分割模型（`yolo26s-seg.pt`）来抠出照片里的猫和人。由于这些文件不在仓库中，克隆下来以后不能直接渲染出成片；代码的主要用途是参考具体做法。若要自己运行，需要在项目根目录下按代码中的路径准备 `audio/`、`lyrics/`、`assets/images/`、`assets/fonts/` 和 `assets/models/`，再依次运行数据准备脚本生成 `data/timing.json`。
+仓库收录全部渲染代码、引擎说明和时间数据的说明。渲染时，代码从项目根目录下读取以下文件：
+
+| 路径 | 内容 |
+|---|---|
+| `audio/song.wav` | 歌曲音频（由原始音轨导出的无压缩音频） |
+| `lyrics/歌词.txt`、`lyrics/lines.json`、`lyrics/manual_fixes.json` | 校订后的歌词、Whisper 逐字对齐结果和人工修正 |
+| `assets/images/` | 画面用到的照片与纹理，来自 Wikimedia Commons 与 Poly Haven，用 `fetch_images.py` 下载并记录作者与授权 |
+| `assets/fonts/` | 霞鹜文楷（钢笔字）与朱雀仿宋（旧字），其余字体取自系统字体目录 |
+| `assets/models/yolo26s-seg.pt` | Ultralytics 的 YOLO26 分割模型，用来抠出照片里的猫和人 |
+
+准备好这些文件后，依次运行数据准备脚本生成 `data/timing.json`，再按下一节的命令渲染。
 
 ## 运行环境
 
-制作时的环境为 Windows 11、NVIDIA RTX 4060 Laptop 显卡、Python 3.11（conda 环境），依赖的软件包及版本见 [requirements.txt](requirements.txt)，其中 torch 为 CUDA 12.8 版本。视频编码只用显卡的硬件编码器 h264_nvenc，需要带 NVENC 的 ffmpeg（代码优先使用 conda 环境 `Library/bin` 下的 ffmpeg，没有时使用系统路径上的）。各段渲染与拼接的命令为：
+制作时的环境为 Windows 11、NVIDIA RTX 4060 Laptop 显卡、Python 3.11（conda 环境），依赖的软件包及版本见 [requirements.txt](requirements.txt)，其中 torch 为 CUDA 12.8 版本。视频编码只用显卡的硬件编码器 h264_nvenc，需要带 NVENC 的 ffmpeg（代码优先使用 conda 环境 `Library/bin` 下的 ffmpeg，其次使用系统路径上的）。各段渲染与拼接的命令为：
 
 ```bash
 python scripts/film/assemble.py render
@@ -52,4 +62,4 @@ python scripts/film/assemble.py concat
 
 ## 许可
 
-代码以 MIT 许可发布，见 [LICENSE](LICENSE)。歌曲、歌词以及画面中使用的图片和字体不在此许可范围内，分别归各自的作者所有。
+代码以 MIT 许可发布，见 [LICENSE](LICENSE)。歌曲、歌词以及画面中使用的图片和字体归各自的作者所有，按各自的授权使用。
