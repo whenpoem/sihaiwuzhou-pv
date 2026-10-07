@@ -1,7 +1,7 @@
 """在歌曲上叠加音效，输出 audio/song_sfx.wav，拼接全片时用它代替 song.wav。
 
-目前只有一处：结尾窗外的 LED 熄灭（seg_h/ending.py 的 T_LED_OFF）之前，一声墙上开关的"咔嗒"。歌曲在这里
-几乎无声（约 -50 dB），开关声单独就听得清楚。开关声按机械开关的发声方式合成：先是按下时很轻的一下，约 14 毫秒
+目前只有一处：结尾窗外的 LED 熄灭（seg_h/ending.py 的 T_LED_OFF）之前，一声墙上电灯按键的"咔嗒"。歌曲在这里
+几乎无声（约 -50 dB），这一声单独就听得清楚。它按机械按键的发声方式合成：先是按下时很轻的一下，约 14 毫秒
 后弹片翻转，发出主要的一下；每一下由一段极短的宽频噪声（触点撞击）和几个快速衰减的高频共振（塑料面板与弹片）
 组成，再加一点低频（墙体）和很短的房间混响。
 
@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts" / "seg_h"))
 SONG = ROOT / "audio" / "song.wav"
 OUT = ROOT / "audio" / "song_sfx.wav"
 
-T_CLICK_LEAD = 0.06                 # 开关声比灯灭早 60 毫秒：先听到开关，再看到变暗
+T_CLICK_LEAD = 0.06                 # 咔嗒声比灯灭早 60 毫秒：先听到按键，再看到变暗
 PEAK_DB = -9.0
 
 
@@ -53,7 +53,7 @@ def main():
     i = int(round((END.T_LED_OFF - T_CLICK_LEAD) * sr))
     x[i:i + len(c)] += c[:, None]
     sf.write(OUT, x, sr, subtype="FLOAT")
-    print(OUT, f"开关声在 {i / sr:.3f} 秒")
+    print(OUT, f"关灯声在 {i / sr:.3f} 秒")
 
 
 if __name__ == "__main__":

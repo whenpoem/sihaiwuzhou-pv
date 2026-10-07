@@ -15,7 +15,7 @@
 | 路径 | 内容 |
 |---|---|
 | `scripts/engine/` | 渲染引擎：平面与粒子、材质与着色器、文字、镜头、调色、逐帧渲染与硬件编码 |
-| `scripts/film/` | 全片层面的代码：镜头与空间布局（`plan.py`）、平面镜头（`flatcam.py`）、交接画面（`handoff.py`）、正式渲染与拼接（`assemble.py`）、结尾的开关音效（`sfx.py`）、图片来源汇总（`credits.py`） |
+| `scripts/film/` | 全片层面的代码：镜头与空间布局（`plan.py`）、平面镜头（`flatcam.py`）、交接画面（`handoff.py`）、正式渲染与拼接（`assemble.py`）、结尾的关灯声（`sfx.py`）、图片来源汇总（`credits.py`） |
 | `scripts/seg_a1/` | 前奏：旧纸上的老照片随鼓点翻开，再印出片名与署名 |
 | `scripts/seg_a2/` | 主歌一前半：钢笔字、猫、电视里的卫星云图 |
 | `scripts/seg_b/` | 主歌一后半：晾衣绳上的被单、白云骑士 |
